@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Counter from './components/Counter'
+
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { isRunning: true };
+    console.log('I am in the CONSTRUCTOR of the App.js.');
+  }
+
+  stopCounter = () => {
+      this.setState({...this.state, isRunning: false })
+  }
+
+  render() {
+    console.log('I am in RENDER of the App.js.');
+    return this.state.isRunning ? (
+      <div className="App">
+        <h2>Clicking this button will destroy the Counter component and clear the state.</h2>
+        <button onClick={this.stopCounter}>Stop the counter</button>
+
+        <Counter /> 
+      </div>
+    ) : null
+  }
 }
 
 export default App;
